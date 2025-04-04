@@ -4,3 +4,5 @@
 <%= cron_job.next_run_at %>
 <%= cron_job.status %>
 
+<%= render @cron_job.cron_job_callbacks %>
+

@@ -1,4 +1,4 @@
-<%= button_to "New Cron Job", new_cron_job_path, method: :get, class: "btn btn-primary" %>
+<%= link_to "New Cron Job", new_cron_job_path, class: "btn btn-primary" %>
 
 <table class="table">
   <thead>
@@ -20,8 +20,9 @@
         <td><%= cron.next_run_at %></td>
         <td><%= cron.status %></td>
         <td>
+          <%= link_to "Show", cron, class: "btn btn-sm btn-primary" %>
           <%= link_to "Edit", edit_cron_job_path(cron), class: "btn btn-sm btn-primary" %>
-          <%= button_to "Delete", cron, method: :delete, class: "btn btn-sm btn-danger" %>
+          <%= link_to "Pause", cron, data: { turbo_method: :delete } %>
       </tr>
     <% end %>
   </tbody>

@@ -1,8 +1,24 @@
 <%= form_with model: @cron_job do |form| %>
-  <%= form.text_field :name, placeholder: "Name", class: "input" %>
+  <%= form.text_field :name, placeholder: "Name", class: handle_input_class(@cron_job, :name) %>
   
-  <%= form.text_field :expression, placeholder: "Cron Expression", class: "input" %>
+  <%= form.text_field :expression, placeholder: "Cron Expression", class: handle_input_class(@cron_job, :expression) %>
+
+  <% if @cron_job.persisted? %>
+    <br />
+    <%= turbo_frame_tag @cron_job.cron_job_callbacks.new do %>
+      <%= render @cron_job.cron_job_callbacks %>
+    <% end %>
+  <% end %>
 
   <%= form.submit class: "btn btn-primary" %>
 <% end %>
 
+<button class="btn" onclick="event.preventDefault(); my_modal_1.showModal()">add integration</button>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Integration</h3>
+    <div class="modal-action">
+      <%= render "cron_job_callbacks/form" %>
+    </div>
+  </div>
+</dialog>

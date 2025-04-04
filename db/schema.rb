@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_25_194837) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_033306) do
+  create_table "cron_job_callbacks", force: :cascade do |t|
+    t.string "external_uuid", null: false
+    t.integer "cron_job_id", null: false
+    t.string "integration_type"
+    t.integer "integration_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cron_job_id"], name: "index_cron_job_callbacks_on_cron_job_id"
+    t.index ["integration_type", "integration_id"], name: "index_cron_job_callbacks_on_integration"
+  end
+
   create_table "cron_jobs", force: :cascade do |t|
     t.string "external_uuid", null: false
     t.string "name", null: false
@@ -46,6 +57,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_194837) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  create_table "webhook_integrations", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "http_method", null: false
+    t.string "request_body", null: false
+    t.string "headers", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "cron_job_callbacks", "cron_jobs"
   add_foreign_key "cron_jobs", "users"
   add_foreign_key "sessions", "users"
 end

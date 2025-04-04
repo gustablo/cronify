@@ -1,0 +1,6 @@
+<%= turbo_stream.prepend CronJobCallback.new do %>
+  <%= render @cron_job_callback %>
+  <script>
+    document.getElementById('my_modal_1').close();
+  </script>
+<% end %>

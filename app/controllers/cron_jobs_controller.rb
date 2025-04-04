@@ -43,4 +43,8 @@ class CronJobsController < ApplicationController
 
     redirect_to cron_jobs_path
   end
+
+  def show
+    @cron_job = CronJob.find params[:id]
+  end
 end

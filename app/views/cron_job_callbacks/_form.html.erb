@@ -1,0 +1,6 @@
+<% if @cron_job.persisted? %>
+  <%= form_with model: [@cron_job, @cron_job.cron_job_callbacks.new], method: "dialog" do |form| %>
+    <%= form.select :type, ["Webhook", "Discord"] %>
+    <%= form.submit %>
+  <% end %>
+<% end %>

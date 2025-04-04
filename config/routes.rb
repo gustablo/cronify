@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :cron_jobs
+  resources :cron_jobs do
+    resources :cron_job_callbacks
+  end
 
   resource :session
   resources :passwords, param: :token

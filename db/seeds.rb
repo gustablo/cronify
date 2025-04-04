@@ -11,11 +11,13 @@
 user = User.find_or_create_by(email_address: 'example@gmail.com')
 user.update(password: '123')
 
-CronJob.find_or_create_by(
-  external_uuid: 'uuid',
+cron = CronJob.find_or_create_by(
+  external_uuid: 'uuid2',
   name: 'First Cron',
   expression: '* * * 1 2',
   last_run_at: Time.now,
   next_run_at: Time.now + 30.minutes,
   user_id: user.id
 )
+cron.save!
+
